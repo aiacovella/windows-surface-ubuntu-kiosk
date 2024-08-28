@@ -49,7 +49,7 @@ This is the software required to run the Ansible script. The procedures for inst
 	```
 	 If you followed the directions above, you should have a directory named *_windows-tablet-ubuntu-kiosk_* under your home directory. This will be referred to as the project root going forward. 
 	
-4. Edit the _hosts_ file located under the project root directory and add the ip address(s) of your tablets under the _[ubuntu]_ section. Each entry will be a combination of a host alias and an IP address as seen in the example below:
+4. Edit the _hosts.ini_ file located under the project root directory and add the ip address(s) of your tablets under the _[ubuntu]_ section. Each entry will be a combination of a host alias and an IP address as seen in the example below:
 
 	```
 	[ubuntu]
@@ -60,6 +60,23 @@ This is the software required to run the Ansible script. The procedures for inst
 		
 	**Note**: It is advantageous to have a static IP address for the tablet as it may change adresses after rebooting. Since this is a Kiosk, you'll have not acccess from the UI to configure the WiFi so you will have to rely on your router to tell you what address the tablet is assigned. A static address eleminates this problem as it will always have the same address. Refer to your home router's documentation on configuring a static address. 
 	
+5. Edit the _policies.json_ file in the project route to add restrictions to specific domains. You can add a section to the policies file for _WebsiteFilter_ to block all URL's and allow specific ones or block specific ones. The following is a configuration for _finance.yahoo.com_. It is purposly left out for this example since their website links to numerous other domains an it was easier to leave it out for our example. The following is an example of allowing only specific URL's:
+
+	```
+	"WebsiteFilter": {
+	  "Block": ["<all_urls>"],
+	  "Exceptions": [
+	    "https://finance.yahoo.com/",
+	    "http://finance.yahoo.com/",
+	    "https://finance.yahoo.com/*",
+	    "http://finance.yahoo.com/*"
+	  ]
+	}
+	```
+	
+	It is recommended that you start without this until you have everyting configured and provisioning the tablet. For additional informaiton on configuring other policies refer to the documentation for [policy templates](https://mozilla.github.io/policy-templates/).
+
+
 
 5. In the _root_ directory of this project, run the ansible playbook to perform the installation onto your tablet with the following command in the root directory of this project. This command will require some values to be filled in. 
 

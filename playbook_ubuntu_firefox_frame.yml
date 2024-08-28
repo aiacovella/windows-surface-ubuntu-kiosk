@@ -219,12 +219,21 @@
         group: root
         mode: '0644'
 
-    - name: Enable the Firefox app service to start on boot
+    - name: Configure Firefox Service Timer
       become: yes
-      ansible.builtin.systemd:
-        name: firefox
-        enabled: yes
-        state: started
+      copy:
+        src: ./configs/firefox-frame.timer
+        dest: /etc/systemd/system/firefox-frame.timer
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Enable Services to start on boot
+      become: yes
+      ansible.builtin.command:
+        cmd: "{{ item }}"
+      loop:
+        - systemctl enable --now firefox-frame.timer
 
     - name: Install ubuntu-frame
       become: yes

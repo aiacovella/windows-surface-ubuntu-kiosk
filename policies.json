@@ -109,15 +109,6 @@
       "SkipOnboarding": true,
       "MoreFromMozilla": false,
       "Locked": true
-    },
-    "WebsiteFilter": {
-      "Block": ["<all_urls>"],
-      "Exceptions": [
-        "https://finance.yahoo.com/",
-        "http://finance.yahoo.com/",
-        "https://finance.yahoo.com/*",
-        "http://finance.yahoo.com/*"
-      ]
     }
   }
 }
