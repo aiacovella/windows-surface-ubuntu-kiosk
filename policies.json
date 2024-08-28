@@ -1,0 +1,123 @@
+{
+  "policies":{
+    "AppAutoUpdate": false,
+    "AllowFileSelectionDialogs" : false,
+    "BackgroundAppUpdate": false,
+    "BlockAboutAddons": true,
+    "BlockAboutConfig" : true,
+    "BlockAboutProfiles": false,
+    "BlockAboutSupport": true,
+    "CaptivePortal": false,
+    "DisableAppUpdate": true,
+    "DisableDeveloperTools": true,
+    "DisableFeedbackCommands": true,
+    "DisableFirefoxAccounts": true,
+    "DisableFirefoxScreenshots": true,
+    "DisableFirefoxStudies": true,
+    "DisableFormHistory": true,
+    "DisableMasterPasswordCreation": true,
+    "DisablePasswordReveal": true,
+    "DisablePocket": true,
+    "DisablePrivateBrowsing": false,
+    "DisableProfileImport": true,
+    "DisableProfileRefresh": true,
+    "DisableSafeMode": true,
+    "DisableSetDesktopBackground": true,
+    "DisableSystemAddonUpdate": true,
+    "DisableTelemetry": true,
+    "DisplayBookmarksToolbar": "never",
+    "DisplayMenuBar": "never",
+    "DontCheckDefaultBrowser": true,
+    "ExtensionUpdate": false,
+    "Homepage": {
+      "StartPage": "none"
+    },
+    "NewTabPage": false,
+    "NoDefaultBookmarks": true,
+    "OfferToSaveLogins": false,
+    "OfferToSaveLoginsDefault": false,
+    "PasswordManagerEnabled": false,
+    "Permissions": {
+      "Camera": {
+        "BlockNewRequests": true,
+        "Locked": true
+      },
+      "Microphone": {
+        "BlockNewRequests": true,
+        "Locked": true
+      },
+      "Location": {
+        "BlockNewRequests": true,
+        "Locked": true
+      },
+      "Notifications": {
+        "BlockNewRequests": true,
+        "Locked": true
+      },
+      "Autoplay": {
+        "BlockNewRequests": true,
+        "Locked": true
+      }
+    },
+    "PictureInPicture": {
+      "Enabled": false,
+      "Locked": true
+    },
+    "PopupBlocking": {
+      "Default": false,
+      "Locked": true
+    },
+    "Preferences": {
+      "browser.quitShortcut.disabled": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "browser.sessionstore.resume_from_crash,": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.gesture.pinch.in": {
+        "Value": "",
+        "Status": "locked"
+      },
+      "browser.gesture.pinch.out": {
+        "Value": "",
+        "Status": "locked"
+      },
+      "extensions.pocket.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.search.suggest.enabled": {
+        "Value": false,
+        "Status": "locked"
+      }
+    },
+    "PrimaryPassword": false,
+    "PrintingEnabled": false,
+    "PromptForDownloadLocation": false,
+    "SearchEngines": {
+      "PreventInstalls": true
+    },
+    "SearchSuggestEnabled": false,
+    "ShowHomeButton": false,
+    "UserMessaging": {
+      "WhatsNew": false,
+      "ExtensionRecommendations": false,
+      "FeatureRecommendations": false,
+      "UrlbarInterventions": false,
+      "SkipOnboarding": true,
+      "MoreFromMozilla": false,
+      "Locked": true
+    },
+    "WebsiteFilter": {
+      "Block": ["<all_urls>"],
+      "Exceptions": [
+        "https://finance.yahoo.com/",
+        "http://finance.yahoo.com/",
+        "https://finance.yahoo.com/*",
+        "http://finance.yahoo.com/*"
+      ]
+    }
+  }
+}

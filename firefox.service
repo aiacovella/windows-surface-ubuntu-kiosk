@@ -1,0 +1,17 @@
+[Unit]
+Description=Firefox Service
+
+[Service]
+Type=simple
+Environment=HOME=/root
+Environment=WAYLAND_DISPLAY=wayland-0
+Environment=MOZ_ENABLE_WAYLAND=1
+Environment=XDG_RUNTIME_DIR=/run/user/0
+Environment=XDG_DATA_DIRS=/usr/local/share:/usr/share:/var/lib/snapd/desktop
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/0/bus
+ExecStart=/snap/bin/firefox --kiosk finance.yahoo.com
+Nice=15
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
