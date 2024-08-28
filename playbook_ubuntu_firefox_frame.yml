@@ -1,7 +1,7 @@
 - name: Install TSS Kiosk
   hosts: ubuntu
   gather_facts: true
-  remote_user: "administrator"
+#  remote_user: "administrator"
 
   vars:
     admin_home_dir: "/home/administrator"
@@ -9,288 +9,288 @@
 
   tasks:
 
-#    - name: Ensure that the admin .ssh directory exists
-#      become_user: administrator
-#      file:
-#        path: "{{ item }}"
-#        state: directory
-#      loop:
-#        - "{{ admin_ssh_dir }}"
-#        - "{{ admin_ssh_dir }}/authorized_keys"
-#
-#    - name: Write your public key to the tablet under authorized keys
-#      become: yes
-#      become_user: administrator
-#      copy:
-#        src: "~/.ssh/id_rsa.pub"
-#        dest: "{{ admin_ssh_dir }}/authorized_keys/id_rsa.pub"
-#        owner: administrator
-#        group: administrator
-#        mode: 0600
-#
-#    - name: Remove unnecessary Apt components
-#      become: true
-#      ansible.builtin.apt:
-#        name: "{{ item }}"
-#        state: absent
-#        purge: yes
-#      loop:
-#        - libreoffice*
-#        - wireshark
-#        - wordpress
-#        - nodejs
-#
-#    - name: Remove Snap components
-#      become: true
-#      ansible.builtin.shell: snap remove {{ item }}
-#      loop:
-#        - cups
-#
-#    - name: Copy the linux surface public key over
-#      become: yes
-#      copy:
-#        src: ./linux-surface.asc
-#        dest: /tmp/surface.asc
-#        group: administrator
-#        owner: administrator
-#        mode: '0775'
-#
-#    - name: Add the linux-surface key to APT
-#      become: true
-#      shell: "apt-key --keyring /etc/apt/trusted.gpg.d/linux-surface.gpg add /tmp/surface.asc"
-#
-#    - name: Add debian repository to APT sources
-#      become: true
-#      apt_repository:
-#        repo: "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main"
-#
-#    - name: Add mozilla repository to APT sources
-#      become: true
-#      apt_repository:
-#        repo: "ppa:mozillateam/ppa"
-#
-#    - name: Run apt update
-#      become: true
-#      apt:
-#          update_cache: yes
-#
-#    - name: Ensure required packages are installed
-#      become: true
-#      apt:
-#        name: "{{ item }}"
-#        state: present
-#      loop:
-#        - git
-#        - curl
-#        - libgles-dev
-#        - libxi-dev
-#        - libxrandr-dev
-#        - libxcursor-dev
-#        - dkms
-#        - systemd
-#        - openssh-client
-#        - gnome-shell-extensions
-#        - gnome-shell-extension-manager
-#        - dconf-cli
-#        - dbus-x11
-#        - sqlite3
-#        - vim
-#        - htop
-#        - net-tools
-#        - silversearcher-ag
-#        - ufw
-#
-#    - name: Ensure required linux surface packages are installed
-#      become: true
-#      apt:
-#        name: "{{ item }}"
-#        state: present
-#      loop:
-#        - linux-image-surface
-#        - linux-headers-surface
-#        - libwacom-surface
-#        - iptsd
-#
-#    - name: Create Firefox configuration directories
-#      become: yes
-#      file:
-#        path: "{{ item }}"
-#        state: directory
-#        group: administrator
-#        owner: administrator
-#        mode: '0775'
-#      loop:
-#        - /etc/firefox/defaults/pref
-#        - /root/.mozilla/firefox/
-#        - /etc/firefox/policies
-#
-#    - name: Copy the Firefox default config preferences file
-#      become: yes
-#      copy:
-#        src: ./config-prefs.js
-#        dest: /etc/firefox/defaults/pref/config-prefs.js
-#        group: administrator
-#        owner: administrator
-#        mode: '0775'
-#
-#    - name: Copy the Autoconfig settings
-#      become: yes
-#      copy:
-#        src: ./autoconfig.js
-#        dest: /etc/firefox/defaults/pref/autoconfig.js
-#        mode: '0775'
-#
-#    - name: Copy the Autoconfig configuration
-#      become: yes
-#      copy:
-#        src: ./firefox.cfg
-#        dest: /etc/firefox/firefox.cfg
-#        mode: '0775'
-#
-#    - name: Copy the Firefox default policies file
-#      become: yes
-#      copy:
-#        src: ./policies.json
-#        dest: /etc/firefox/policies/policies.json
-#        group: administrator
-#        owner: administrator
-#        mode: '0775'
-#
-#    - name: Run apt-get clean
-#      become: true
-#      ansible.builtin.command:
-#        cmd: apt-get clean
-#
-#    - name: Run apt-get autoremove
-#      become: true
-#      ansible.builtin.apt:
-#        autoremove: yes
-#
-#    - name: Disable automatic updates
-#      become: true
-#      lineinfile:
-#        path: /etc/apt/apt.conf.d/20auto-upgrades
-#        regexp: "{{ item.regexp }}"
-#        line: "{{ item.line }}"
-#      with_items:
-#        - regexp: '^APT::Periodic::Update-Package-Lists.*'
-#          line: 'APT::Periodic::Update-Package-Lists "0";'
-#        - regexp: '^APT::Periodic::Unattended-Upgrade.*'
-#          line: 'APT::Periodic::Unattended-Upgrade "0";'
-#
-#    - name: Disable Suspend in logind.conf
-#      become: true
-#      lineinfile:
-#        insertafter: '^\[daemon\]'
-#        path:  /etc/systemd/logind.conf
-#        regexp: "{{ item.regexp }}"
-#        line: "{{ item.line }}"
-#        state: present
-#      loop:
-#        - { regexp: '^HandleLidSwitch=', line: 'HandleLidSwitch=ignore' }
-#        - { regexp: '^HandleSuspendKey=', line: 'HandleSuspendKey=ignore' }
-#        - { regexp: '^HandleHibernateKey=', line: 'HandleHibernateKey=ignore' }
-#
-#    - name: Disable Suspend in greeter.dconf-defaults
-#      become: true
-#      lineinfile:
-#        insertafter: '^\[org/gnome/settings-daemon/plugins/power\]'
-#        path: /etc/gdm3/greeter.dconf-defaults
-#        regexp: "{{ item.regexp }}"
-#        line: "{{ item.line }}"
-#        state: present
-#      loop:
-#        - { regexp: '^sleep-inactive-ac-type=', line: "sleep-inactive-ac-type='blank'" }
-#        - { regexp: '^sleep-inactive-battery-type=', line: "sleep-inactive-battery-type='blank'" }
-#
-#    - name: Add admin user to groups
-#      become: true
-#      ansible.builtin.user:
-#        name: "{{ ansible_user }}"
-#        groups: "netdev"
-#        append: true
-#
-#    - name: Create systemd service for the Firefox application
-#      become: yes
-#      template:
-#        src: ./firefox.service
-#        dest: /etc/systemd/system/firefox.service
-#        owner: root
-#        group: root
-#        mode: '0644'
-#
-#    - name: Enable the Firefox app service to start on boot
-#      become: yes
-#      ansible.builtin.systemd:
-#        name: firefox
-#        enabled: yes
-#        state: started
-#
-#    - name: Install ubuntu-frame
-#      become: yes
-#      ansible.builtin.command:
-#        cmd: "snap install ubuntu-frame"
-#
-#    - name: Configure ubuntu-frame
-#      become: yes
-#      ansible.builtin.command: "{{ item }}"
-#      loop:
-#        - "snap set ubuntu-frame daemon=true"
-#        - "snap remove wpe-webkit-mir-kiosk"
-#        - "snap set ubuntu-frame config='wallpaper-top=0x92006a wallpaper-bottom=0xdd4814 idle-timeout=0'"
-#
-#    - name: Configure Network Connection Permissions
-#      become: yes
-#      copy:
-#        src: ./90-nm-netdev.pkla
-#        dest: /etc/polkit-1/localauthority/90-mandatory.d/90-nm-netdev.pkla
-#        owner: administrator
-#        group: administrator
-#        mode: '0755'
-#
-#    - name: Export GIT_SSH_COMMAND in .bashrc
-#      become: yes
-#      ansible.builtin.lineinfile:
-#        path: "{{ admin_home_dir}}/.bashrc"
-#        line: 'export GIT_SSH_COMMAND="ssh -i /home/administrator/.ssh/kiosk_rsa -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"'
-#        state: present
-#
-#    - name: Reset all ufw to default
-#      become: yes
-#      ufw:
-#        state: reset
-#        policy: deny
-#
-#    - name: Enable Firewall
-#      become: yes
-#      ufw:
-#         state: enabled
-#         policy: deny
-#
-#    - name: Create firewall UDP rules
-#      become: yes
-#      ufw:
-#        rule: allow
-#        proto: udp
-#        port: "{{item}}"
-#      with_items:
-#        - 67
-#
-#    - name: Create firewall TCP Allow rules
-#      become: yes
-#      ufw:
-#        rule: allow
-#        proto: tcp
-#        port: "{{item}}"
-#      with_items:
-#        - 22
-#
-#    - name: Configure Rate Limit to Prevent Brute Force Attacks
-#      become: yes
-#      ufw:
-#        rule: limit
-#        port: ssh
-#        proto: tcp
+    - name: Ensure that the admin .ssh directory exists
+      become_user: administrator
+      file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - "{{ admin_ssh_dir }}"
+        - "{{ admin_ssh_dir }}/authorized_keys"
+
+    - name: Write your public key to the tablet under authorized keys
+      become: yes
+      become_user: administrator
+      copy:
+        src: "~/.ssh/id_rsa.pub"
+        dest: "{{ admin_ssh_dir }}/authorized_keys/id_rsa.pub"
+        owner: administrator
+        group: administrator
+        mode: 0600
+
+    - name: Remove unnecessary Apt components
+      become: true
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: absent
+        purge: yes
+      loop:
+        - libreoffice*
+        - wireshark
+        - wordpress
+        - nodejs
+
+    - name: Remove Snap components
+      become: true
+      ansible.builtin.shell: snap remove {{ item }}
+      loop:
+        - cups
+
+    - name: Copy the linux surface public key over
+      become: yes
+      copy:
+        src: ./linux-surface.asc
+        dest: /tmp/surface.asc
+        group: administrator
+        owner: administrator
+        mode: '0775'
+
+    - name: Add the linux-surface key to APT
+      become: true
+      shell: "apt-key --keyring /etc/apt/trusted.gpg.d/linux-surface.gpg add /tmp/surface.asc"
+
+    - name: Add debian repository to APT sources
+      become: true
+      apt_repository:
+        repo: "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main"
+
+    - name: Add mozilla repository to APT sources
+      become: true
+      apt_repository:
+        repo: "ppa:mozillateam/ppa"
+
+    - name: Run apt update
+      become: true
+      apt:
+          update_cache: yes
+
+    - name: Ensure required packages are installed
+      become: true
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - git
+        - curl
+        - libgles-dev
+        - libxi-dev
+        - libxrandr-dev
+        - libxcursor-dev
+        - dkms
+        - systemd
+        - openssh-client
+        - gnome-shell-extensions
+        - gnome-shell-extension-manager
+        - dconf-cli
+        - dbus-x11
+        - sqlite3
+        - vim
+        - htop
+        - net-tools
+        - silversearcher-ag
+        - ufw
+
+    - name: Ensure required linux surface packages are installed
+      become: true
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - linux-image-surface
+        - linux-headers-surface
+        - libwacom-surface
+        - iptsd
+
+    - name: Create Firefox configuration directories
+      become: yes
+      file:
+        path: "{{ item }}"
+        state: directory
+        group: administrator
+        owner: administrator
+        mode: '0775'
+      loop:
+        - /etc/firefox/defaults/pref
+        - /root/.mozilla/firefox/
+        - /etc/firefox/policies
+
+    - name: Copy the Firefox default config preferences file
+      become: yes
+      copy:
+        src: ./config-prefs.js
+        dest: /etc/firefox/defaults/pref/config-prefs.js
+        group: administrator
+        owner: administrator
+        mode: '0775'
+
+    - name: Copy the Autoconfig settings
+      become: yes
+      copy:
+        src: ./autoconfig.js
+        dest: /etc/firefox/defaults/pref/autoconfig.js
+        mode: '0775'
+
+    - name: Copy the Autoconfig configuration
+      become: yes
+      copy:
+        src: ./firefox.cfg
+        dest: /etc/firefox/firefox.cfg
+        mode: '0775'
+
+    - name: Copy the Firefox default policies file
+      become: yes
+      copy:
+        src: ./policies.json
+        dest: /etc/firefox/policies/policies.json
+        group: administrator
+        owner: administrator
+        mode: '0775'
+
+    - name: Run apt-get clean
+      become: true
+      ansible.builtin.command:
+        cmd: apt-get clean
+
+    - name: Run apt-get autoremove
+      become: true
+      ansible.builtin.apt:
+        autoremove: yes
+
+    - name: Disable automatic updates
+      become: true
+      lineinfile:
+        path: /etc/apt/apt.conf.d/20auto-upgrades
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      with_items:
+        - regexp: '^APT::Periodic::Update-Package-Lists.*'
+          line: 'APT::Periodic::Update-Package-Lists "0";'
+        - regexp: '^APT::Periodic::Unattended-Upgrade.*'
+          line: 'APT::Periodic::Unattended-Upgrade "0";'
+
+    - name: Disable Suspend in logind.conf
+      become: true
+      lineinfile:
+        insertafter: '^\[daemon\]'
+        path:  /etc/systemd/logind.conf
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        state: present
+      loop:
+        - { regexp: '^HandleLidSwitch=', line: 'HandleLidSwitch=ignore' }
+        - { regexp: '^HandleSuspendKey=', line: 'HandleSuspendKey=ignore' }
+        - { regexp: '^HandleHibernateKey=', line: 'HandleHibernateKey=ignore' }
+
+    - name: Disable Suspend in greeter.dconf-defaults
+      become: true
+      lineinfile:
+        insertafter: '^\[org/gnome/settings-daemon/plugins/power\]'
+        path: /etc/gdm3/greeter.dconf-defaults
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        state: present
+      loop:
+        - { regexp: '^sleep-inactive-ac-type=', line: "sleep-inactive-ac-type='blank'" }
+        - { regexp: '^sleep-inactive-battery-type=', line: "sleep-inactive-battery-type='blank'" }
+
+    - name: Add admin user to groups
+      become: true
+      ansible.builtin.user:
+        name: "{{ ansible_user }}"
+        groups: "netdev"
+        append: true
+
+    - name: Create systemd service for the Firefox application
+      become: yes
+      template:
+        src: ./firefox.service
+        dest: /etc/systemd/system/firefox.service
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Enable the Firefox app service to start on boot
+      become: yes
+      ansible.builtin.systemd:
+        name: firefox
+        enabled: yes
+        state: started
+
+    - name: Install ubuntu-frame
+      become: yes
+      ansible.builtin.command:
+        cmd: "snap install ubuntu-frame"
+
+    - name: Configure ubuntu-frame
+      become: yes
+      ansible.builtin.command: "{{ item }}"
+      loop:
+        - "snap set ubuntu-frame daemon=true"
+        - "snap remove wpe-webkit-mir-kiosk"
+        - "snap set ubuntu-frame config='wallpaper-top=0x92006a wallpaper-bottom=0xdd4814 idle-timeout=0'"
+
+    - name: Configure Network Connection Permissions
+      become: yes
+      copy:
+        src: ./90-nm-netdev.pkla
+        dest: /etc/polkit-1/localauthority/90-mandatory.d/90-nm-netdev.pkla
+        owner: administrator
+        group: administrator
+        mode: '0755'
+
+    - name: Export GIT_SSH_COMMAND in .bashrc
+      become: yes
+      ansible.builtin.lineinfile:
+        path: "{{ admin_home_dir}}/.bashrc"
+        line: 'export GIT_SSH_COMMAND="ssh -i /home/administrator/.ssh/kiosk_rsa -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"'
+        state: present
+
+    - name: Reset all ufw to default
+      become: yes
+      ufw:
+        state: reset
+        policy: deny
+
+    - name: Enable Firewall
+      become: yes
+      ufw:
+         state: enabled
+         policy: deny
+
+    - name: Create firewall UDP rules
+      become: yes
+      ufw:
+        rule: allow
+        proto: udp
+        port: "{{item}}"
+      with_items:
+        - 67
+
+    - name: Create firewall TCP Allow rules
+      become: yes
+      ufw:
+        rule: allow
+        proto: tcp
+        port: "{{item}}"
+      with_items:
+        - 22
+
+    - name: Configure Rate Limit to Prevent Brute Force Attacks
+      become: yes
+      ufw:
+        rule: limit
+        port: ssh
+        proto: tcp
 
     - name: Remove Firefox Mozilla Directories
       become: yes

@@ -11,6 +11,9 @@ The procedures below were tested with the following:
 **Note**: These procedures assume you have some knowledge of Linux and use of the Linux terminal. 
 
 ## Installing the OS
+<!--TDD Add note for referring to article -->
+<!--TDD Add note to use administrator as the user name or to change it in the sc-->
+
 
 
 ## Installing the software on the provisioning
@@ -45,12 +48,26 @@ This is the software required to run the Ansible script. The procedures for inst
 	git clone https://github.com/aiacovella/windows-tablet-ubuntu-kiosk.git
 	```
 	 If you followed the directions above, you should have a directory named *_windows-tablet-ubuntu-kiosk_* under your home directory. This will be referred to as the project root going forward. 
-	 
-4. Initialize the provisioning by executing the following: 
+	
+4. Edit the _hosts_ file located under the project root directory and add the ip address(s) of your tablets under the _[ubuntu]_ section. Each entry will be a combination of a host alias and an IP address as seen in the example below:
 
 	```
-	cd ~/windows-tablet-ubuntu-kiosk
-	ansible-playbook playbook_ubuntu_firefox_frame.yml
+	[ubuntu]
+	my_host_one=192.168.1.40
+	
 	```
+	If you are provisioning multiple tablets, you can add an entry for each one here. **Note**: Be sure that each entry has its own individual alias.
+		
+	**Note**: It is advantageous to have a static IP address for the tablet as it may change adresses after rebooting. Since this is a Kiosk, you'll have not acccess from the UI to configure the WiFi so you will have to rely on your router to tell you what address the tablet is assigned. A static address eleminates this problem as it will always have the same address. Refer to your home router's documentation on configuring a static address. 
+	
+
+5. In the _root_ directory of this project, run the ansible playbook to perform the installation onto your tablet with the following command in the root directory of this project. This command will require some values to be filled in. 
+
+Using this example as a template, replace the {username} entry with the name of the user you created while installing the OS onto the tablet and replace each of the two {password} entries with the password you assigned to the uer when you installed the OS.
+	
+	```
+	ansible-playbook -u {username} playbook_ubuntu_firefox_frame.yml --extra-vars 'ansible_ssh_pass={password}  ansible_become_pass={password}'
+	```
+
 	
 
