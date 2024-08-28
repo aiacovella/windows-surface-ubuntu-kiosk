@@ -222,7 +222,7 @@
     - name: Configure Firefox Service Timer
       become: yes
       copy:
-        src: ./configs/firefox-frame.timer
+        src: ./firefox-frame.timer
         dest: /etc/systemd/system/firefox-frame.timer
         owner: root
         group: root
