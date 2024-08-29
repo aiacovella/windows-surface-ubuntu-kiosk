@@ -6,13 +6,11 @@ The procedures below were tested with the following:
 
 * Tablet: Windows Surface Pro 7 i7 16GB RAM 256GB SSD (other later versions may likely work)
 * Tablet OS: Ubuntu 22.04 AMD64
-* Provisioning Machine OS: Ubuntu 22.04 (Can be provision from Mac OS but the software install procedures may vary)
+* Provisioning Machine OS: Ubuntu 22.04 (Can be provisioned from and OSX machine but the software install procedures will vary)
 
 **Note**: These procedures assume you have some knowledge of Linux and use of the Linux terminal. 
 
 <!--TDD Add note for referring to article -->
-<!--TDD Add note to use administrator as the user name or to change it in the sc-->
-
 
 ## Preparing the Tablet for Provisioning
 
@@ -169,26 +167,26 @@ This is the software required to run the Ansible script. The procedures for inst
 5. Edit the _firefox-frame.service_ file in the project route. In there you'll find a line that looks like the following:
 
 	```
-	ExecStart=/snap/bin/firefox --kiosk www.cnn.com
+	ExecStart=/snap/bin/firefox --kiosk www.amazon.com
 	```
 
 	This line in the service definition specifies which command to run when the service starts up. In this case, it launches Firefox with the the _--kiosk_ option and the URL to open the browser with. You can replace the url with your own custom URL. 	
 
-6. Edit the _policies.json_ file in the project route to add restrictions to specific domains. You can add a section to the policies file for _WebsiteFilter_ to block all URL's and allow specific ones or block specific ones. The following is an example configuration for _cnn.com_. It is purposly left out for this example since their website links to numerous other domains an it was easier to leave it out for our example. The following is an example of allowing only specific URL's:
+6. Edit the _policies.json_ file in the project route to add restrictions to specific domains. You can add a section to the policies file for _WebsiteFilter_ to block all URL's and allow specific ones or block specific ones. The following is an example configuration for _amazon.com_. It is purposly left out for this example since their website links to numerous other domains an it was easier to leave it out for our example. The following is an example of allowing only specific URL's:
 
 	```
 	"WebsiteFilter": {
 	  "Block": ["<all_urls>"],
 	  "Exceptions": [
-	    "https://cnn.com/",
-	    "http://cnn.com/",
-	    "https://cnn.com/*",
-	    "http://cnn.com/*"
+	    "https://amazon.com/",
+	    "http://amazon.com/",
+	    "https://amazon.com/*",
+	    "http://amazon.com/*"
 	  ]
 	}
 	```
 	
-	It is recommended that you start without this until you have everyting configured and provisioning the tablet. For additional informaiton on configuring other policies refer to the documentation for [policy templates](https://mozilla.github.io/policy-templates/).
+	It is recommended that you start without this until you have everything configured and provisioning the tablet. For additional informaiton on configuring other policies refer to the documentation for [policy templates](https://mozilla.github.io/policy-templates/).
 
 
 7. In the _root_ directory of this project, run the ansible playbook to perform the installation onto your tablet with the following command in the root directory of this project. This command will require some values to be filled in. 

@@ -9,7 +9,7 @@ Environment=MOZ_ENABLE_WAYLAND=1
 Environment=XDG_RUNTIME_DIR=/run/user/0
 Environment=XDG_DATA_DIRS=/usr/local/share:/usr/share:/var/lib/snapd/desktop
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/0/bus
-ExecStart=/snap/bin/firefox --kiosk www.cnn.com
+ExecStart=/snap/bin/firefox --kiosk www.amazon.com
 Nice=15
 Restart=always
 
