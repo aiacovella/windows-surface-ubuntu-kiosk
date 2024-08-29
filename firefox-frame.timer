@@ -3,7 +3,7 @@ Description=Wait timer to delay the start of firefox-frame.service
 
 [Timer]
 OnBootSec=10
-Unit=firefox-frame.service
+Unit=firefox.service
 
 [Install]
 WantedBy=multi-user.target
