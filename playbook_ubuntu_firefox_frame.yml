@@ -133,13 +133,6 @@
         owner: administrator
         mode: '0775'
 
-    - name: Copy the Autoconfig settings
-      become: yes
-      copy:
-        src: ./autoconfig.js
-        dest: /etc/firefox/defaults/pref/autoconfig.js
-        mode: '0775'
-
     - name: Copy the Autoconfig configuration
       become: yes
       copy:
