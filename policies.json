@@ -68,6 +68,10 @@
       "Locked": true
     },
     "Preferences": {
+      "browser.urlbar.quicksuggest.enabled" : {
+        "Value": false,
+        "Status": "locked"
+      },
       "browser.quitShortcut.disabled": {
         "Value": true,
         "Status": "locked"

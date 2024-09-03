@@ -25,3 +25,13 @@ pref("browser.tabs.loadInBackground", false);
 pref("browser.tabs.loadDivertedInBackground", false);
 pref("browser.search.openintab", false);
 pref("full-screen-api.ignore-widgets", true);
+pref("general.config.filename", "firefox.cfg");
+pref("general.config.obscure_value", 0);
+pref("general.config.sandbox_enabled", false);
+pref("browser.sessionstore.max_resumed_crashes", 10000);
+pref("apz.keyboard.enabled", false);
+pref("browser.urlbar.maxHistoricalSearchSuggestions", 0);
+pref("browser.urlbar.showSearchSuggestionsFirst", false);
+pref("browser.urlbar.maxRichResults", 0);
+pref("browser.urlbar.autoFill",false);
+
