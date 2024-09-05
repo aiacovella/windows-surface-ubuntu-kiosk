@@ -89,7 +89,7 @@ Prior to being provisioned, the Microsoft Tablet must be loaded with the Ubuntu 
 18. Click on the _Continue_ button. This will bring you the the _Erase disk and install Ubuntu_ dialog. 
 19. Click on the _Install Now_ button. In the dialog that comes up, click on the _Continue_ button. This will take you the dialog to select your location.
 20. Select your location then click on the _Continue_ button. This will take you to the _Who are you?_ dialog.
-21. Enter in a name of a user. This will default the next two entries.
+21. Enter in a name of a user. This will set a default value for the next two entries in that form. Leave those as is.
 22. Change the computer name to something unique
 23. Enter in a password
 24. Confirm the password
@@ -110,12 +110,15 @@ Prior to being provisioned, the Microsoft Tablet must be loaded with the Ubuntu 
 33.	Click on the _WiFi_ icon in the upper right hand corner and select **Settings**. This will take you to the _WiFi Settings_ dialog.
 34. Click on the settings icon to the right of the network you are connected to. This will bring up a dialog with the network information. Take note of this IPV4 Address as you will need it for Ansible provisioning. Miltiple tablets can be provisioned at the same time with the Ansible script so it would be advisable to first perform the OS install an multiple tablets, leave them running and note the IP address of each one. 		
 
-**Note**: It is advantageous to have a static IP address for the tablet as it may change its address after rebooting. Since this is a Kiosk, you'll have no acccess from the UI to configure the WiFi so you will have to rely on your router to tell you what address the tablet is assigned. A static address eleminates this problem as it will always have the same address. Refer to your home router's documentation on configuring a static address. 
-35. Test the network connectivity from your provisioning machine to each of the tablets with the following step (with a an OS X or Linux machine):
+	**Note**: It is advantageous to have a static IP address for the tablet as it may change its address after rebooting. Since this is a Kiosk, you'll have no acccess from the UI to configure the WiFi so you will have to rely on your router to tell you what address the tablet is assigned. A static address eleminates this problem as it will always have the same address. Refer to your home router's documentation on configuring a static address. 
+
+35. Test the network connectivity from your provisioning machine to each of the tablets by executing the following command in the terminal:
+
 	
 	```
 	ssh {username}@{tablet IP addres noted above from the WiFi configuration}
 	```
+	
 	If you are prompted for a password, you are able to reach the machine. **Note**: Your provisioning machine must be on the same network as the tablet(s).
 
 
@@ -206,6 +209,17 @@ This is the software required to run the Ansible script. The procedures for inst
 	Once the script reaches the end, it will reboot your tablet. After the tablet reboots, there is a short period of time before the browser comes up. 
 
 
-
+## Digging Deeper
 	
+### The Ansible Script
+The file named **playbook\_ubuntu\_fire** in this repository contains the Ansible instruction set. Each task has an associated comment that describes the operation it is pereforming. You can enhance this script to perform additional configuration. Start by looking into the [Ansible built in modules](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html) for basic tasks. Additional modules are available for performing specific tasks such such as tasksk that are AWS or Azure specifc. See this [index](https://docs.ansible.com/ansible/latest/collections/index.html) for additional modules. 
 
+
+### Disabling Firefox Hot Keys
+The file named **firefox.config** in this repository contains the Javascript for removing key modifiers and associated commands. Refer to this [file](https://searchfox.org/mozilla-central/source/browser/base/content/browser-sets.inc) for additional information on those keys.  
+
+### Firefox Policies
+The file named **policy.json** in this repository contain configurations of policies to disable functionality. It also contains a preferences section for configuring preferences which is basically anything you can configure by going to the browser and entering the *about:config* in the URL. There is an additional file named **config-prefs.js** that contain additional preferences. Some configurations such as *browser.gesture.pinch.in* and *browser.gesture.pinch.out* seem to only work when set from here. You'll have to experiment with them. 
+
+### Firefox Service
+The file named **policy.json** in this repository contains the definition  of the firefox service. In this file you'll find a line containing *ExecStart*. This is the command that is run to start up Firefox and where it provides the URL for Firefox to open up with. 
