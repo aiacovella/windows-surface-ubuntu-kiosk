@@ -28,7 +28,7 @@ Prior to being provisioned, the Microsoft Tablet must be loaded with the Ubuntu 
 
 	<img src="./images/balena_step_1.png" alt="drawing"/> 
 
-5. In the panel that appears next, enter in the following URL:
+5. In the panel that appears next, enter the following URL:
 
 	```
 	https://releases.ubuntu.com/jammy/ubuntu-22.04.4-desktop-amd64.iso
@@ -58,21 +58,22 @@ Prior to being provisioned, the Microsoft Tablet must be loaded with the Ubuntu 
 3. Press and hold the volume-down button on your Surface.
 4.  While holding the volume-down button, press and release the power button. You’ll see the Microsoft or Surface logo on your screen. Continue holding the volume-down button until you see spinning dots beneath the logo. This should bring you to the UEFI settings. 
 
-	<img src="https://support.content.office.net/en-us/media/9d35e27b-a732-ad8d-2ce9-62be7429a5ed.png" alt="drawing"/> 
+	<img src="./images/uefi_initial.png" alt="drawing"/> 
+	 
 
 5. Select **Security** from the left side menu. This will bring you to the _Security_ settings. 
 
-	<img src="https://support.content.office.net/en-us/media/70924891-d2af-34de-4102-464a1776570d.png" alt="drawing"/> 
+	<img src="./images/uefi_security.png" alt="drawing"/> 
 
 6. Click on the **Change configuration** button and in the dialog that comes up, select the option for _None_ then press the **OK** button. This will return you to the UEFI settings. 
 
 7. Select **Boot Configuration** from the left side menu. This will bring you to the _Boot Configuration_ settings. 
 
-	<img src="https://support.content.office.net/en-us/media/f9b12674-e703-9571-4d7a-9da43dee9777.png" alt="drawing"/> 
- 
-8. Deselect all the check boxes and select only _USB Storage_
+    <img src="./images/uefi_boot_config.png" alt="drawing"/>
 
-9. In the _Advanced Options_ section, ensure that the _Enable Boot from USB devices_ is switched to the _On_ position. All others should be switched to the _Off_ position. 
+8. Deselect all the check boxes and select only _USB Storage_.
+
+9. In the **Advanced Options** section, ensure that the _Enable Boot from USB devices_ is switched to the _On_ position. All others should be switched to the _Off_ position. 
 
 10. Click on the **Exit** option button the left side menu. 
 
@@ -86,19 +87,19 @@ Prior to being provisioned, the Microsoft Tablet must be loaded with the Ubuntu 
 15. When the dialog closes, click on the **Continue** button. This will take you to the _Updates and other software_ dialog. 
 16. Click on the radio button for _Minimal installation_, leave the other defaults then click on the **Continue** button. It may take some time to respond at this point but eventually it will take you the the _Installation type_ dialog. 
 17. Select _Erase disk and install Ubuntu_. Don't configure any of the advanced options since we want to use the entire drive space for Linux and the default partitions should be sufficient. 
-18. Click on the _Continue_ button. This will bring you the the _Erase disk and install Ubuntu_ dialog. 
+18. Click on the _Continue_ button. This will bring you the _Erase disk and install Ubuntu_ dialog. 
 19. Click on the _Install Now_ button. In the dialog that comes up, click on the _Continue_ button. This will take you the dialog to select your location.
 20. Select your location then click on the _Continue_ button. This will take you to the _Who are you?_ dialog.
-21. Enter in a name of a user. This will set a default value for the next two entries in that form. Leave those as is.
+21. Enter a name of a user. This will set a default value for the next two entries in that form. Leave those as is.
 22. Change the computer name to something unique
-23. Enter in a password
+23. Enter a password
 24. Confirm the password
 25. Ensure that the _Require my password to log in_ radio button is enabled. 
 26. Click on the **Continue** button. This will commence the installation.  
 27. At the end of the installation a dialog box will appear. Click on the **Restart Now** button. This will rebot the OS. When it comes back up it will prompt you to remove the installation medium. 
 28. Remove the USB drive at this point then press the **Enter** key. 
 29. After the OS reboots again, log in as the user you just created. 
-30. Open a terminal window. This can be done by clicking on the circular search icon on the upper left hand side of the desktop and keying in "Terminal" to find the terminal. Alternately, you can click on the 	<img src="./images/windows-key.jpg" alt="Windows" width=20/> key on your keyboard and search from there. 
+30. Open a terminal window. This can be done by clicking on the circular search icon on the upper left hand side of the desktop and keying in "Terminal" to find the terminal. Alternately, you can click on the <img src="./images/windows-key.jpg" alt="Windows" width=20/> key on your keyboard and search from there. 
 31. In the terminal, run the following command:
 	
 	```
@@ -116,7 +117,7 @@ Prior to being provisioned, the Microsoft Tablet must be loaded with the Ubuntu 
 
 	
 	```
-	ssh {username}@{tablet IP addres noted above from the WiFi configuration}
+	ssh {username}@{tablet IP address noted above from the WiFi configuration}
 	```
 	
 	If you are prompted for a password, you are able to reach the machine. **Note**: Your provisioning machine must be on the same network as the tablet(s).
